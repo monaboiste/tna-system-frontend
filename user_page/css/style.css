@@ -39,7 +39,7 @@ a:active {
         max-height: 80px;
         float: left;
         margin: 0;
-        position: absolute;
+        position: relative;
         left: 0px;
     }
         
@@ -95,7 +95,7 @@ a:active {
     min-width: 16.875%;
     min-height: 200px;
     padding: 0;
-    margin: 15% 0.5% 0 15.5%;
+    margin: 15% auto 15% auto;
     border-radius: 15px;
     line-height: 200px;
 }
@@ -106,8 +106,7 @@ a:active {
     background-color: white;
     min-width: 16.875%;
     min-height: 200px;
-    padding: 0;
-    margin: 15% 0.5% 0 0%;
+    margin: 15% auto 15% auto;
     border-radius: 15px;
     line-height: 200px;
 }
@@ -118,10 +117,9 @@ a:active {
     background-color: white;
     min-width: 69%;
     min-height: 200px;
-    padding: 0;
-    margin: 15% 0.5% 0 15.5%;
+    margin: 15% auto 15% auto;
     border-radius: 15px;
-    line-height: 200px;
+   
 }
 
 #right-bar {
@@ -153,4 +151,28 @@ a:active {
     min-height: 80px;
     text-decoration: none;
     line-height: 80px;
+}
+
+#content{
+    position: relative;
+    padding-top: 10%;
+    margin: 25% auto 5% auto;
+    height: fit-content;
+    width: fit-content;
+   
+}
+ul{
+    margin: 2% ;
+    padding-inline-start: 0px;
+    position: fit-content;
+    list-style: none;
+    
+    
+}
+li{
+    margin: 2%;
+    position: relative;
+    margin:auto;
+    border:.5px solid black;
+    border-radius: 10px;
 }
