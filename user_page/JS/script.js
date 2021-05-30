@@ -19,7 +19,36 @@ function fetchUserData(){
     headers: myHeaders,
     };
     
-    fetch(`https://tna-system.herokuapp.com/api/employees/${id}`, requestOptions)
+    // fetch(`https://tna-system.herokuapp.com/api/employees/${id}`, requestOptions)
+    // .then((response) => {
+    //     if(response.ok){
+    //         return response.json();
+    //     }
+    //     else console.log("Nie działa");
+    // })
+    // .then((data) => {
+    //     console.log(data);
+    //     let output = 
+    //     `
+    //     <ul>
+    //         <li>Imię: ${data.firstName}         </li>
+    //         <li>Nazwisko: ${data.lastName}      </li>
+    //         <li>Dział: ${data.department}       </li>
+    //         <li>Ulica: ${data.street}           </li>
+    //         <li>Kod pocztowy: ${data.postCode}  </li>
+    //         <li>Miasto: ${data.city}            </li>
+    //         <li>Nr umowy: ${data.contractId}    </li>
+    //     </ul>
+    //     `;
+
+    //     document.getElementById('employeeData').innerHTML = output;
+
+    // })
+    // .catch(error => {
+    //     console.log('error', error);
+    // });
+
+    fetch(`../JS/dummy.json`, requestOptions)
     .then((response) => {
         if(response.ok){
             return response.json();
@@ -28,7 +57,6 @@ function fetchUserData(){
     })
     .then((data) => {
         console.log(data);
-        // userData = document.getElementById('userData').innerHTML = data.city;
         let output = 
         `
         <ul>
@@ -36,7 +64,7 @@ function fetchUserData(){
             <li>Nazwisko: ${data.lastName}      </li>
             <li>Dział: ${data.department}       </li>
             <li>Ulica: ${data.street}           </li>
-            <li>Kod pocztowy: ${data.postcode}  </li>
+            <li>Kod pocztowy: ${data.postCode}  </li>
             <li>Miasto: ${data.city}            </li>
             <li>Nr umowy: ${data.contractId}    </li>
         </ul>

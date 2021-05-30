@@ -21,7 +21,6 @@ function login(){
         if(response.ok){
             sessionStorage.setItem('username', username);
             sessionStorage.setItem('password', password);
-            
         }
         else if (response.status === 401){
             document.getElementById('loginError').innerHTML = 'Nieprawidłowe dane logowania!';

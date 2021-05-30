@@ -26,29 +26,28 @@ a:active {
 
 #header {
     clear: both;
+    display: inline-block;
+vertical-align: middle;
     width: 100%;
     font-size: 20px;
 }
 #header > a{
-    display: block;
     height: 80px;
 }
 
 
     .logo {
-        max-height: 80px;
-        float: left;
-        margin: 0;
         position: relative;
         left: 0px;
+        max-height: 80px;
+       
     }
         
     .logout {
-        min-height: 80px;
-        float: left;
-        margin: 0;
         position: absolute;
+        
         right: 0px;
+        min-height: 80px;
     }
 
     .logo_img{
@@ -76,25 +75,24 @@ a:active {
 }
 
 #left-bar {
-    float: left;
+ 
     min-width: 14%;
     min-height: 500px;
     display: block;
 }
 
 #main-content {
-    float: left;
+  
     min-width: 81%;
     display: block;
 }
 
 .first_container {
     text-align: center;
-    float: left;
+
     background-color: white;
     min-width: 16.875%;
     min-height: 200px;
-    padding: 0;
     margin: 15% auto 15% auto;
     border-radius: 15px;
     line-height: 200px;
@@ -102,7 +100,7 @@ a:active {
 
 .container {
     text-align: center;
-    float: left;
+   
     background-color: white;
     min-width: 16.875%;
     min-height: 200px;
@@ -112,13 +110,13 @@ a:active {
 }
 
 .surfaceContainer {
+    position: relative;
+    margin: 5% auto 5% auto;
+    min-width: 20%;
     text-align: center;
-    float: left;
     background-color: white;
-    min-width: 69%;
-    min-height: 200px;
-    margin: 15% auto 15% auto;
-    border-radius: 15px;
+    border-radius: 20px;
+    
    
 }
 
@@ -155,24 +153,23 @@ a:active {
 
 #content{
     position: relative;
-    padding-top: 10%;
-    margin: 25% auto 5% auto;
+    margin: 30% auto 30% auto;
     height: fit-content;
-    width: fit-content;
+    width: 30%;
    
 }
 ul{
-    margin: 2% ;
-    padding-inline-start: 0px;
+    margin: 10% ;
+    padding: 2%;
     position: fit-content;
     list-style: none;
-    
-    
 }
 li{
-    margin: 2%;
+    
     position: relative;
-    margin:auto;
-    border:.5px solid black;
+    margin:2% 1% 2% 1%;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    border: .5px solid black;
     border-radius: 10px;
 }
