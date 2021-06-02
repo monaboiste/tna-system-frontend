@@ -1,0 +1,58 @@
+#calendar {
+    max-width: 800px;
+    max-height: 32em;
+    margin: 40px auto;
+}
+
+#totalWorkHours {
+    text-align: right;
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+.fc-toolbar-title {
+    color: #2c3e50;
+}
+
+.fc-event {
+    background-color: #9baec2;
+    color: #ffffff;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.fc-event-title {
+    font-style: normal !important;
+    font-family: 'Ruda', sans-serif;
+}
+
+.fc .fc-bg-event {
+    opacity: 1 !important;
+}
+
+.fc-day-today {
+    background: #00dab562 !important;
+}
+
+.modal-content {
+    border: none !important;
+    margin-top: 10em;
+    position: relative;
+    min-width: 600px;
+    min-height: 400px;
+}
+
+.modal-footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+}
+
+.modal-header {
+    border-radius: 6px 6px 0px 0px;
+}
+
+.modal-body {
+    font-size: 13px;
+}

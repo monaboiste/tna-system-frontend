@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang='pl'>
+
+<head>
+    <script src='authcheck.js'></script>
+    <script src='employeeData.js'></script>
+
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta name='description' content=''>
+    <meta name='author' content='Dashboard'>
+    <meta name='keyword' content='Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina'>
+    <title>System Rejestracji Czasu Pracy</title>
+
+    <!-- Favicons -->
+    <link href='img/favicon.png' rel='icon'>
+    <link href='img/apple-touch-icon.png' rel='apple-touch-icon'>
+
+    <!-- Bootstrap core CSS -->
+    <link href='lib/bootstrap/css/bootstrap.min.css' rel='stylesheet'>
+    <!--external css-->
+    <link href='lib/font-awesome/css/font-awesome.css' rel='stylesheet' />
+    <!-- <link href='lib/fullcalendar/bootstrap-fullcalendar.css' rel='stylesheet' /> -->
+    <!-- Custom styles for this template -->
+    <link href='css/style.css' rel='stylesheet'>
+    <link href='css/style-responsive.css' rel='stylesheet'>
+    <link href='css/calendar.css' rel='stylesheet'>
+    <link href='lib/fullcalendar/main.css' rel='stylesheet' />
+    <script src='lib/fullcalendar/main.js'></script>
+</head>
+
+<body>
+    <section id='container'>
+        <!-- **********************************************************************************************************************************************************
+        TOP BAR CONTENT & NOTIFICATIONS
+        *********************************************************************************************************************************************************** -->
+        <!--header start-->
+        <header class='header black-bg'>
+            <div class='sidebar-toggle-box'>
+                <div class='fa fa-bars tooltips' data-placement='right' data-original-title='Toggle Navigation'></div>
+            </div>
+            <!--logo start-->
+            <a href='index.html' class='logo'><b>RCP<span>SYSTEM</span></b></a>
+            <!--logo end-->
+            <div class='nav notify-row' id='top_menu'>
+            </div>
+            <div class='top-menu'>
+                <ul class='nav pull-right top-menu'>
+                    <li><a class='logout' id='logoutButton' style='cursor:pointer;'>Wyloguj</a></li>
+                </ul>
+            </div>
+        </header>
+        <!--header end-->
+        <!-- **********************************************************************************************************************************************************
+        MAIN SIDEBAR MENU
+        *********************************************************************************************************************************************************** -->
+        <!--sidebar start-->
+        <aside>
+            <div id='sidebar' class='nav-collapse '>
+                <!-- sidebar menu start-->
+                <ul class='sidebar-menu' id='nav-accordion'>
+                    <p class='centered'><a href='profile.html'><img src='img/ui-sam.jpg' class='img-circle'
+                                width='80'></a></p>
+                    <h5 id='employeeData' class='centered'></h5>
+                    <li class='mt'>
+                        <a class='inactive' href='index.html'>
+                            <i class='fa fa-user-circle'></i>
+                            <span>Profil</span>
+                        </a>
+                    </li>
+                    <li class='mt'>
+                        <a class='active' href='calendar.html'>
+                            <i class='fa fa-calendar'></i>
+                            <span>Czas pracy</span>
+                        </a>
+                    </li>
+                </ul>
+                <!-- sidebar menu end-->
+            </div>
+        </aside>
+        <!--sidebar end-->
+        <!-- **********************************************************************************************************************************************************
+        MAIN CONTENT
+        *********************************************************************************************************************************************************** -->
+        <!--main content start-->
+        <section id='main-content'>
+            <section class='wrapper'>
+
+
+                <div id='calendar'>
+                </div>
+                <div id='totalWorkHours'>
+                    <h4>Przepracowano: <span id='hours'>0</span>h <span id='mins'>0</span>min</h2>
+                </div>
+
+                <div id='calendarModal' class='modal fade'>
+                    <div class='modal-dialog'>
+                        <div class='modal-content'>
+                            <div class='modal-header'>
+                                <button type='button' class='close' data-dismiss='modal'><span
+                                        aria-hidden='true'></span> <span class='sr-only'>close</span></button>
+                                <h4 id='modalTitle' class='modal-title'></h4>
+                            </div>
+                            <div id='modalBody' class='modal-body'> </div>
+                            <div class='modal-footer'>
+                                <button type='button' class='btn btn-default' data-dismiss='modal'>Zamknij</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+            <!-- /wrapper -->
+        </section>
+        <!-- /MAIN CONTENT -->
+        <!--main content end-->
+        <!--footer start-->
+        <footer class='site-footer'>
+            <div class='text-center'>
+                <p>
+                    &copy; Copyrights <strong>POLKUTCIPBRACIADEV</strong>. All Rights Reserved
+                </p>
+                <div class='credits'>
+                    Created with Dashio template by <a href='https://templatemag.com/'>TemplateMag</a>
+                </div>
+                <a href='calendar.html#' class='go-top'>
+                    <i class='fa fa-angle-up'></i>
+                </a>
+            </div>
+        </footer>
+        <!--footer end-->
+    </section>
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src='lib/jquery/jquery.min.js'></script>
+    <script src='lib/jquery-ui-1.9.2.custom.min.js'></script>
+    <script src='lib/bootstrap/js/bootstrap.min.js'></script>
+    <script class='include' type='text/javascript' src='lib/jquery.dcjqaccordion.2.7.js'></script>
+    <script src='lib/jquery.scrollTo.min.js'></script>
+    <script src='lib/jquery.nicescroll.js' type='text/javascript'></script>
+    <!--common script for all pages-->
+    <script src='lib/common-scripts.js'></script>
+    <script src='calendar.js'></script>
+    <script src='logout.js'></script>
+</body>
+
+</html>
