@@ -63,15 +63,21 @@
                                 width='80'></a></p>
                     <h5 id='employeeData' class='centered'></h5>
                     <li class='mt'>
+                        <!-- TODO: Ta karta powinna byc dostepna tylko dla admin (sprawdzic role) -->
+
+                        <a class='inactive' href='employees.html'>
+                            <i class='fa fa-users'></i>
+                            <span>Pracownicy</span>
+                        </a>
+                        <!-- TODO end -->
+
                         <a class='inactive' href='index.html'>
                             <i class='fa fa-user-circle'></i>
                             <span>Profil</span>
                         </a>
-                    </li>
-                    <li class='mt'>
                         <a class='active' href='calendar.html'>
                             <i class='fa fa-calendar'></i>
-                            <span>Czas pracy</span>
+                            <span>Godziny pracy</span>
                         </a>
                     </li>
                 </ul>
@@ -85,8 +91,6 @@
         <!--main content start-->
         <section id='main-content'>
             <section class='wrapper'>
-
-
                 <div id='calendar'>
                 </div>
                 <div id='totalWorkHours'>

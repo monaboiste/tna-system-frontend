@@ -70,15 +70,21 @@
           <p class='centered'><a href='profile.html'><img src='img/ui-sam.jpg' class='img-circle' width='80'></a></p>
           <h5 id='employeeData' class='centered'></h5>
           <li class='mt'>
+            <!-- TODO: Ta karta powinna byc dostepna tylko dla admin (sprawdzic role) -->
+
+            <a class='inactive' href='employees.html'>
+              <i class='fa fa-users'></i>
+              <span>Pracownicy</span>
+            </a>
+            <!-- TODO end -->
+
             <a class='active' href='index.html'>
               <i class='fa fa-user-circle'></i>
               <span>Profil</span>
-              </a>
-          </li>
-          <li class='mt'>
+            </a>
             <a class='inactive' href='calendar.html'>
               <i class='fa fa-calendar'></i>
-              <span>Calendar</span>
+              <span>Godziny pracy</span>
             </a>
           </li>
         </ul>
@@ -92,11 +98,9 @@
     <!--main content start-->
     <section id='main-content'>
       <section class='wrapper'>
-        <div class='row'>
           <div class='col-lg-9 main-chart'>
-            <!--CUSTOM CHART START -->
             <div class='border-head'>
-              <h3>DASHBOARD</h3>
+              <h3>PROFIL</h3>
             </div>
           </div>
       </section>
@@ -113,7 +117,7 @@
         </div>
         <a href='index.html#' class='go-top'>
           <i class='fa fa-angle-up'></i>
-          </a>
+        </a>
       </div>
     </footer>
     <!--footer end-->

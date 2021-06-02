@@ -14,22 +14,16 @@
 
     <!-- Favicons -->
     <link href='img/favicon.png' rel='icon'>
+    <link href='img/apple-touch-icon.png' rel='apple-touch-icon'>
 
     <!-- Bootstrap core CSS -->
     <link href='lib/bootstrap/css/bootstrap.min.css' rel='stylesheet'>
     <!--external css-->
     <link href='lib/font-awesome/css/font-awesome.css' rel='stylesheet' />
-    <link rel='stylesheet' type='text/css' href='lib/gritter/css/jquery.gritter.css' />
-    <!-- Custom styles for this template -- >
+    <!-- <link href='lib/fullcalendar/bootstrap-fullcalendar.css' rel='stylesheet' /> -->
+    <!-- Custom styles for this template -->
     <link href='css/style.css' rel='stylesheet'>
     <link href='css/style-responsive.css' rel='stylesheet'>
-
-    <!-- =======================================================
-    Template Name: Dashio
-    Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
-    Author: TemplateMag.com
-    License: https://templatemag.com/license/
-  ======================================================= -->
 </head>
 
 <body>
@@ -70,27 +64,23 @@
                     <p class='centered'><a href='profile.html'><img src='img/ui-sam.jpg' class='img-circle'
                                 width='80'></a></p>
                     <h5 id='employeeData' class='centered'></h5>
+                    <li class='mt'>
 
 
                     <!-- TODO: Ta karta powinna byc dostepna tylko dla admin (sprawdzic role) -->
 
-                    <li class='mt'>
                         <a class='active' href='employees.html'>
                             <i class='fa fa-users'></i>
                             <span>Pracownicy</span>
                         </a>
-                    </li>
                     <!-- TODO end -->
-                    <li class='mt'>
-                        <a class='active' href='index.html'>
+                        <a class='inactive' href='index.html'>
                             <i class='fa fa-user-circle'></i>
                             <span>Profil</span>
                         </a>
-                    </li>
-                    <li class='mt'>
                         <a class='inactive' href='calendar.html'>
                             <i class='fa fa-calendar'></i>
-                            <span>Calendar</span>
+                            <span>Godziny pracy</span>
                         </a>
                     </li>
                 </ul>
@@ -102,18 +92,49 @@
         MAIN CONTENT
         *********************************************************************************************************************************************************** -->
         <!--main content start-->
-        <section id='main-content'>
-            <section class='wrapper'>
-                <div class='row'>
-                    <div class='col-lg-9 main-chart'>
-                        <!--CUSTOM CHART START -->
-                        <div class='border-head'>
-                            <h3>DASHBOARD</h3>
-                        </div>
-                    </div>
-            </section>
-        </section>
-        <!--main content end-->
+<section id="main-content">
+    <section class="wrapper">
+        <div class='col-lg-9 main-chart'>
+            <div class='border-head'>
+                <h3>PRACOWNICY</h3>
+            </div>
+        </div>
+        <div class="row mt">
+            <div class="col-md-12">
+                <div class="content-panel">
+                    <table class="table table-striped table-advance table-hover">
+                        <thead>
+                            <tr>
+                                <th><i class="fa fa-bullhorn"></i> Pracownik</th>
+                                <th class="hidden-phone"><i class="fa fa-question-circle"></i> Login</th>
+                                <th><i class=" fa fa-edit"></i> Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <a href="basic_table.html#">Aneta Lorenc</a>
+                                </td>
+                                <td class="hidden-phone">alorenc999</td>
+                                <td><span class="label label-success label-mini">aktywny</span></td>
+                                <td>
+                                    <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                                    <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                    <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /content-panel -->
+            </div>
+            <!-- /col-md-12 -->
+        </div>
+        <!-- /row -->
+    </section>
+</section>
+<!-- /MAIN CONTENT -->
         <!--footer start-->
         <footer class='site-footer'>
             <div class='text-center'>
@@ -123,7 +144,7 @@
                 <div class='credits'>
                     Created with Dashio template by <a href='https://templatemag.com/'>TemplateMag</a>
                 </div>
-                <a href='admin.html#' class='go-top'>
+                <a href='employees.html#' class='go-top'>
                     <i class='fa fa-angle-up'></i>
                 </a>
             </div>

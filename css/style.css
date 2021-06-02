@@ -3318,8 +3318,11 @@ ul.chat-available-user li a:hover {
     border-left: 3px solid #BEC3C7;
 }
 
-/*footer*/
 .site-footer {
+    bottom: 0;
+    z-index: -1;
+    width: 100%;
+    position: absolute;
     background: #4ECDC4;
     color: #fff;
     padding: 15px 0;
