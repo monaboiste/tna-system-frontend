@@ -122,9 +122,9 @@
                             <div id='modalNewBody' class='modal-body'> </div>
                             <br><br><br>
                             <div class='modal-footer'>
-                                <div class="form-group">
-                                    <div class="col-lg-offset-2 col-lg-10">
-                                        <button class="btn btn-theme" type="submit">Zapisz</button>
+                                <div class='form-group'>
+                                    <div class='col-lg-offset-2 col-lg-10'>
+                                        <button id='sendNewEmployeeButton' class='btn btn-theme' type='submit'>Zapisz</button>
                                         <button type='button' class='btn btn-default' data-dismiss='modal'>Anuluj</button>
                                     </div>
                                 </div>
@@ -238,49 +238,49 @@
 
         function createValidationForm() {
             const form = `
-                <div class="form-panel">
-                  <div class="form">
-                    <form class="cmxform form-horizontal style-form" id="signupForm" method="get" action="">
-                      <div class="form-group ">
-                        <label for="firstname" class="control-label col-lg-2">Imie</label>
-                        <div class="col-lg-10">
-                          <input class=" form-control" id="firstname" name="firstname" type="text" />
+                <div class='form-panel'>
+                  <div class='form'>
+                    <form id='newEmployeeForm' class='cmxform form-horizontal style-form'>
+                      <div class='form-group '>
+                        <label for='firstName' class='control-label col-lg-2'>Imie</label>
+                        <div class='col-lg-10'>
+                          <input class=' form-control' id='firstName' name='firstName' type='text' />
                         </div>
                       </div>
-                      <div class="form-group ">
-                        <label for="lastname" class="control-label col-lg-2">Nazwisko</label>
-                        <div class="col-lg-10">
-                          <input class=" form-control" id="lastname" name="lastname" type="text" />
+                      <div class='form-group '>
+                        <label for='lastName' class='control-label col-lg-2'>Nazwisko</label>
+                        <div class='col-lg-10'>
+                          <input class=' form-control' id='lastName' name='lastName' type='text' />
                         </div>
                       </div>
-                      <div class="form-group ">
-                        <label for="username" class="control-label col-lg-2">Ulica</label>
-                        <div class="col-lg-10">
-                          <input class="form-control " id="username" name="username" type="text" />
+                      <div class='form-group '>
+                        <label for='street' class='control-label col-lg-2'>Ulica</label>
+                        <div class='col-lg-10'>
+                          <input class='form-control ' id='street' name='street' type='text' />
                         </div>
                       </div>
-                      <div class="form-group ">
-                        <label for="username" class="control-label col-lg-2">Kod pocztowy</label>
-                        <div class="col-lg-10">
-                          <input class="form-control " id="username" name="username" type="text" />
+                      <div class='form-group '>
+                        <label for='postCode' class='control-label col-lg-2'>Kod pocztowy</label>
+                        <div class='col-lg-10'>
+                          <input class='form-control ' id='postCode' name='postCode' type='text' />
                         </div>
                       </div>
-                      <div class="form-group ">
-                        <label for="username" class="control-label col-lg-2">Miast</label>
-                        <div class="col-lg-10">
-                          <input class="form-control " id="username" name="username" type="text" />
+                      <div class='form-group '>
+                        <label for='city' class='control-label col-lg-2'>Miasto</label>
+                        <div class='col-lg-10'>
+                          <input class='form-control ' id='city' name='city' type='text' />
                         </div>
                       </div>
-                      <div class="form-group ">
-                        <label for="username" class="control-label col-lg-2">Dział</label>
-                        <div class="col-lg-10">
-                          <input class="form-control " id="username" name="username" type="text" />
+                      <div class='form-group '>
+                        <label for='department' class='control-label col-lg-2'>Dział</label>
+                        <div class='col-lg-10'>
+                          <input class='form-control ' id='department' name='department' type='text' />
                         </div>
                       </div>
-                      <div class="form-group ">
-                        <label for="username" class="control-label col-lg-2">Numer umowy</label>
-                        <div class="col-lg-10">
-                          <input class="form-control " id="username" name="username" type="text" />
+                      <div class='form-group '>
+                        <label for='contractId' class='control-label col-lg-2'>Numer umowy</label>
+                        <div class='col-lg-10'>
+                          <input class='form-control ' id='contractId' name='contractId' type='text' />
                         </div>
                       </div>
                     </form>
@@ -290,6 +290,7 @@
         }
 
         document.getElementById('newEmployeeButton').addEventListener('click', function () {
+            document.getElementById('sendNewEmployeeButton').setAttribute('style', 'opacity:1;');
             let modal = document.getElementById('newModal');
             modal.setAttribute('style', 'display:block;');
             modal.classList.add('in');
@@ -303,6 +304,45 @@
             document.getElementById('modalNewTitle').textContent = 'Dodaj nowego pracownika';
             document.getElementById('modalNewBody').innerHTML = createValidationForm();
 
+        });
+
+        document.getElementById('sendNewEmployeeButton').addEventListener('click', function () {
+            let formData = $('#newEmployeeForm').serializeArray();
+            const requestBody = {
+                firstName: formData[0].value,
+                lastName: formData[1].value,
+                street: formData[2].value,
+                postCode: formData[3].value,
+                city: formData[4].value,
+                department: formData[5].value,
+                contractId: formData[6].value
+            };
+            const requestOptions = {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify(requestBody)
+            };
+
+            fetch('http://localhost:8080/api/employees', requestOptions)
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    return Promise.reject(response);
+                }
+            })
+            .then(newEmployee => {
+                console.log(newEmployee)
+                // add to employee table, inform user / close modal
+                createRecord(newEmployee);
+                document.getElementById('modalNewBody').innerHTML = "Pomyślnie dodano nowego pracownika!";
+                document.getElementById('sendNewEmployeeButton').setAttribute('style', 'opacity:0;');
+            })
+            .catch(error => {
+                console.log('error', error);
+                document.getElementById('modalNewBody').innerHTML = "Coś poszło nie tak...";
+                document.getElementById('sendNewEmployeeButton').setAttribute('style', 'opacity:0;');
+            });
         });
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -334,6 +374,9 @@
                             });
 
                             const userId = e.target.parentElement.parentElement.id.split('employeeId')[1];
+                            // TODO
+                            // DELETE
+                            // USER
                     });
                 });
             })
