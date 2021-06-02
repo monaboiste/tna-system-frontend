@@ -1,16 +1,5 @@
-function title(elapsed) {
-    const hours = Math.floor(elapsed / 60);
-    const minutes = elapsed % 60;
-    return hours.toString() + ':' + minutes.toString().padStart(2, '0');
-}
-
-function details(enteredAt, leftAt) {
-    return 'Godzina wejścia: ' + enteredAt.toString() + '<br><br>' +
-        'Godzina wyjścia: ' + leftAt.toString();
-}
-const dateLongFormat = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-
 document.addEventListener('DOMContentLoaded', function () {
+    const dateLongFormat = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const calendarEl = document.getElementById('calendar');
 
     let calendar = new FullCalendar.Calendar(calendarEl, {
@@ -27,13 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     calendar.render();
-    $(document).ready(function () {
-        window.foo = calendar.view;
-    });
 
     fetchCalendarData().then(attendanceRecords => {
-        console.log(attendanceRecords);
-
         attendanceRecords.forEach(record => {
             timestamp = record.enteredAt.split(' ');
             calendar.addEvent({
@@ -87,4 +71,15 @@ function fetchCalendarData() {
         .then(response => response.json())
         .then(data => Promise.resolve(data))
         .catch(error => console.log('error', error));
+}
+
+function title(elapsed) {
+    const hours = Math.floor(elapsed / 60);
+    const minutes = elapsed % 60;
+    return hours.toString() + ':' + minutes.toString().padStart(2, '0');
+}
+
+function details(enteredAt, leftAt) {
+    return 'Godzina wejścia: ' + enteredAt.toString() + '<br><br>' +
+        'Godzina wyjścia: ' + leftAt.toString();
 }

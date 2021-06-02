@@ -1,0 +1,42 @@
+.modal-content {
+    border: none !important;
+    margin: auto;
+    position: relative;
+    min-width: 600px;
+    min-height: 400px;
+}
+
+.modal-footer {
+    border-top: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+}
+
+.modal-header {
+    border-radius: 6px 6px 0px 0px;
+}
+
+.modal-body {
+    font-size: 13px;
+}
+
+.form-horizontal.style-form .form-group {
+    /* override */
+    border-bottom: none;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+.form-group {
+    margin-bottom: 0px;
+}
+
+.form-panel {
+    /* override */
+    background: #ffffff;
+    margin: 10px;
+    padding: 10px;
+    box-shadow: none;
+    text-align: left;
+}
