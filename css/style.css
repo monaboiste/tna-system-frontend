@@ -2601,11 +2601,11 @@ ul.inbox-pagination li {
 }
 .modal-header h4.modal-title {
     font-weight:300;
-    font-family:'Open Sans',sans-serif;
+    font-family: 'Ruda', sans-serif;
 }
 .modal-body label {
     font-weight:400;
-    font-family: 'Open Sans',sans-serif;
+    font-family: 'Ruda', sans-serif;
 }
 
 .compose-mail {

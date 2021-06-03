@@ -175,6 +175,31 @@
                     </div>
                 </div>
                 <!--new employee modal end-->
+                <!--delete employee modal start-->
+                <div id='deleteEmployeeModal' class='modal fade' tabindex='-1' role='dialog' data-backdrop="true"
+                    aria-labelledby='deleteEmployeeModalLabel' aria-hidden='true'>
+                    <div class='vertical-alignment-helper'>
+                        <div class='modal-dialog vertical-align-center'>
+                            <div class='modal-content'>
+                                <div class='modal-header'>
+                                    <h4 id='deleteEmployeeModalTitle' class='modal-title'>Usuń pracownika</h4>
+                                </div>
+                                <div id='deleteEmployeeModalBody' class='modal-body'>
+                                    Czy na pewno chcesz usunąć pracownika:
+                                    <p id='deleteEmployeeName' style='display: inline;'></p>
+                                </div>
+                                <div class='modal-footer'>
+                                    <p id='deleteEmployeeError'></p>
+                                    <button id='deleteEmployeeRequest' type='button' class='btn btn-danger'
+                                        style='cursor:pointer;'>Usuń</button>
+                                    <button type='button' class='btn btn-default' data-dismiss='modal'
+                                        style='cursor:pointer;'>Anuluj</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--new employee modal end-->
 
                 <div class='col-lg-9 main-chart'>
                     <div class='border-head'>
@@ -271,8 +296,8 @@
                         <label class='label label-success btn-xs'>aktywny</span>
                     </td>
                     <td>
-                        <button class='deleteEmployeeButton btn btn-danger btn-xs'>
-                            usuń
+                        <button class='deleteEmployeeButton btn btn-danger btn-xs' data-toggle='modal' data-target='#deleteEmployeeModal'>
+                            - usuń
                         </button>
                     </td>
                 </tr>`;
@@ -333,13 +358,41 @@
                     employees.forEach(employee => combinedTemplate += createRecord(employee))
                     employeeTable.innerHTML = combinedTemplate;
 
-                            // const userId = e.target.parentElement.parentElement.id.split('employeeId')[1];
-                            // TODO
-                            // DELETE
-                            // USER
+                    document.querySelectorAll('.deleteEmployeeButton').forEach(button => {
+                        button.addEventListener('click', e => {
+                            document.getElementById('deleteEmployeeError').textContent = '';
+                            document.getElementById('deleteEmployeeName').textContent = e.target.parentElement.parentElement.children[0].innerText;
+
+                            const userId = e.target.parentElement.parentElement.id.split('employeeId')[1];
+
+                            document.getElementById('deleteEmployeeRequest').addEventListener('click', function () {
+                                deleteEmployee(userId);
+                            })
+                        });
+                    });
                  })
                 .catch(error => console.log('error', error));
         });
+
+        function deleteEmployee(userId) {
+            const requestOptions = {
+                method: 'DELETE',
+                headers: headers,
+            };
+
+            fetch(`http://localhost:8080/api/employees/${userId}`, requestOptions)
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload();
+                    } else {
+                        return Promise.reject(response);
+                    }
+                })
+                .catch(error => {
+                    console.log('error', error)
+                    document.getElementById('deleteEmployeeError').textContent = 'Coś poszło nie tak...';
+                });
+        }
 
     </script>
 </body>
