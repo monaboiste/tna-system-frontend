@@ -34,12 +34,24 @@
     background: #00dab562 !important;
 }
 
+.vertical-alignment-helper {
+    display:table;
+    height: 100%;
+    width: 100%;
+    pointer-events:none;
+}
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+    pointer-events:none;
+}
 .modal-content {
     border: none !important;
-    margin-top: 10em;
     position: relative;
-    min-width: 600px;
+    width: 600px;
     min-height: 400px;
+    margin: auto;
 }
 
 .modal-footer {

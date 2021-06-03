@@ -27,6 +27,7 @@
     <link href='css/validation-form.css' rel='stylesheet'>
 </head>
 <!-- .modal-open .modal -->
+
 <body>
     <section id='container'>
         <!-- **********************************************************************************************************************************************************
@@ -95,43 +96,85 @@
         <!--main content start-->
         <section id='main-content'>
             <section class='wrapper'>
-
-                <div id='deleteModal' class='modal fade'>
-                    <div class='modal-dialog'>
-                        <div class='modal-content'>
-                            <div class='modal-header'>
-                                <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'></span> <span
-                                        class='sr-only'>close</span></button>
-                                <h4 id='modalDeleteTitle' class='modal-title'></h4>
-                            </div>
-                            <div id='modalDeleteBody' class='modal-body'> </div>
-                            <div class='modal-footer'>
-                                <button type='button' class='btn btn-default' data-dismiss='modal'>Anuluj</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id='newModal' class='modal fade'>
-                    <div class='modal-dialog'>
-                        <div class='modal-content'>
-                            <div class='modal-header'>
-                                <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'></span> <span
-                                        class='sr-only'>close</span></button>
-                                <h4 id='modalNewTitle' class='modal-title'></h4>
-                            </div>
-                            <div id='modalNewBody' class='modal-body'> </div>
-                            <br><br><br>
-                            <div class='modal-footer'>
-                                <div class='form-group'>
-                                    <div class='col-lg-offset-2 col-lg-10'>
-                                        <button id='sendNewEmployeeButton' class='btn btn-theme' type='submit'>Zapisz</button>
-                                        <button type='button' class='btn btn-default' data-dismiss='modal'>Anuluj</button>
+                <!--new employee modal start-->
+                <div id='newEmployeeModal' class='modal fade' tabindex='-1' role='dialog' data-backdrop="true"
+                    aria-labelledby='newEmployeeModalLabel' aria-hidden='true'>
+                    <div class='vertical-alignment-helper'>
+                        <div class='modal-dialog vertical-align-center'>
+                            <div class='modal-content'>
+                                <div class='modal-header'>
+                                    <h4 id='newEmployeeModalTitle' class='modal-title'>Dodaj nowego pracownika</h4>
+                                </div>
+                                <div id='newEmployeeModalBody' class='modal-body'>
+                                    <div class='form-panel'>
+                                        <div class='form'>
+                                            <form id='newEmployeeForm' class='cmxform form-horizontal style-form'>
+                                                <div class='form-group '>
+                                                    <label for='firstName' class='control-label col-lg-2'>Imie</label>
+                                                    <div class='col-lg-10'>
+                                                        <input class=' form-control' id='firstName' name='firstName'
+                                                            type='text' />
+                                                    </div>
+                                                </div>
+                                                <div class='form-group '>
+                                                    <label for='lastName'
+                                                        class='control-label col-lg-2'>Nazwisko</label>
+                                                    <div class='col-lg-10'>
+                                                        <input class=' form-control' id='lastName' name='lastName'
+                                                            type='text' />
+                                                    </div>
+                                                </div>
+                                                <div class='form-group '>
+                                                    <label for='street' class='control-label col-lg-2'>Ulica</label>
+                                                    <div class='col-lg-10'>
+                                                        <input class='form-control ' id='street' name='street'
+                                                            type='text' />
+                                                    </div>
+                                                </div>
+                                                <div class='form-group '>
+                                                    <label for='postCode' class='control-label col-lg-2'>Kod
+                                                        pocztowy</label>
+                                                    <div class='col-lg-10'>
+                                                        <input class='form-control ' id='postCode' name='postCode'
+                                                            type='text' />
+                                                    </div>
+                                                </div>
+                                                <div class='form-group '>
+                                                    <label for='city' class='control-label col-lg-2'>Miasto</label>
+                                                    <div class='col-lg-10'>
+                                                        <input class='form-control ' id='city' name='city'
+                                                            type='text' />
+                                                    </div>
+                                                </div>
+                                                <div class='form-group '>
+                                                    <label for='department' class='control-label col-lg-2'>Dział</label>
+                                                    <div class='col-lg-10'>
+                                                        <input class='form-control ' id='department' name='department'
+                                                            type='text' />
+                                                    </div>
+                                                </div>
+                                                <div class='form-group '>
+                                                    <label for='contractId' class='control-label col-lg-2'>Numer
+                                                        umowy</label>
+                                                    <div class='col-lg-10'>
+                                                        <input class='form-control ' id='contractId' name='contractId'
+                                                            type='text' />
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
+                                </div>
+                                <div class='modal-footer'>
+                                    <p id='newEmployeeError'></p>
+                                    <button id='newEmployeeRequest' type='button' class='btn btn-info' style='cursor:pointer;'>Zapisz</button>
+                                    <button type='button' class='btn btn-default' data-dismiss='modal' style='cursor:pointer;'>Anuluj</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!--new employee modal end-->
 
                 <div class='col-lg-9 main-chart'>
                     <div class='border-head'>
@@ -158,11 +201,11 @@
                                 <tbody>
                                     <tr>
                                         <td></td>
-                                        <td</td>
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            <button id='newEmployeeButton' class='btn btn-success btn-xs'>
+                                            <button id='newEmployeeButton' class='btn btn-success btn-xs'
+                                                data-toggle='modal' data-target='#newEmployeeModal'>
                                                 + nowy
                                             </button>
                                         </td>
@@ -236,77 +279,11 @@
             return employeeRecordTemplate.trim();
         }
 
-        function createValidationForm() {
-            const form = `
-                <div class='form-panel'>
-                  <div class='form'>
-                    <form id='newEmployeeForm' class='cmxform form-horizontal style-form'>
-                      <div class='form-group '>
-                        <label for='firstName' class='control-label col-lg-2'>Imie</label>
-                        <div class='col-lg-10'>
-                          <input class=' form-control' id='firstName' name='firstName' type='text' />
-                        </div>
-                      </div>
-                      <div class='form-group '>
-                        <label for='lastName' class='control-label col-lg-2'>Nazwisko</label>
-                        <div class='col-lg-10'>
-                          <input class=' form-control' id='lastName' name='lastName' type='text' />
-                        </div>
-                      </div>
-                      <div class='form-group '>
-                        <label for='street' class='control-label col-lg-2'>Ulica</label>
-                        <div class='col-lg-10'>
-                          <input class='form-control ' id='street' name='street' type='text' />
-                        </div>
-                      </div>
-                      <div class='form-group '>
-                        <label for='postCode' class='control-label col-lg-2'>Kod pocztowy</label>
-                        <div class='col-lg-10'>
-                          <input class='form-control ' id='postCode' name='postCode' type='text' />
-                        </div>
-                      </div>
-                      <div class='form-group '>
-                        <label for='city' class='control-label col-lg-2'>Miasto</label>
-                        <div class='col-lg-10'>
-                          <input class='form-control ' id='city' name='city' type='text' />
-                        </div>
-                      </div>
-                      <div class='form-group '>
-                        <label for='department' class='control-label col-lg-2'>Dział</label>
-                        <div class='col-lg-10'>
-                          <input class='form-control ' id='department' name='department' type='text' />
-                        </div>
-                      </div>
-                      <div class='form-group '>
-                        <label for='contractId' class='control-label col-lg-2'>Numer umowy</label>
-                        <div class='col-lg-10'>
-                          <input class='form-control ' id='contractId' name='contractId' type='text' />
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>`;
-                return form.trim();
-        }
-
         document.getElementById('newEmployeeButton').addEventListener('click', function () {
-            document.getElementById('sendNewEmployeeButton').setAttribute('style', 'opacity:1;');
-            let modal = document.getElementById('newModal');
-            modal.setAttribute('style', 'display:block;');
-            modal.classList.add('in');
-
-            document.querySelectorAll('.btn-default').forEach(button => {
-                button.addEventListener('click', function () {
-                    modal.removeAttribute('style');
-                    modal.classList.remove('in');
-                });
-            });
-            document.getElementById('modalNewTitle').textContent = 'Dodaj nowego pracownika';
-            document.getElementById('modalNewBody').innerHTML = createValidationForm();
-
+            document.getElementById('newEmployeeError').textContent = '';
         });
 
-        document.getElementById('sendNewEmployeeButton').addEventListener('click', function () {
+        document.getElementById('newEmployeeRequest').addEventListener('click', function () {
             let formData = $('#newEmployeeForm').serializeArray();
             const requestBody = {
                 firstName: formData[0].value,
@@ -324,25 +301,22 @@
             };
 
             fetch('http://localhost:8080/api/employees', requestOptions)
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    return Promise.reject(response);
-                }
-            })
-            .then(newEmployee => {
-                console.log(newEmployee)
-                // add to employee table, inform user / close modal
-                createRecord(newEmployee);
-                document.getElementById('modalNewBody').innerHTML = "Pomyślnie dodano nowego pracownika!";
-                document.getElementById('sendNewEmployeeButton').setAttribute('style', 'opacity:0;');
-            })
-            .catch(error => {
-                console.log('error', error);
-                document.getElementById('modalNewBody').innerHTML = "Coś poszło nie tak...";
-                document.getElementById('sendNewEmployeeButton').setAttribute('style', 'opacity:0;');
-            });
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        return Promise.reject(response);
+                    }
+                })
+                .then(newEmployee => {
+                    console.log(newEmployee)
+                    createRecord(newEmployee);
+                    window.location.reload();
+                })
+                .catch(error => {
+                    console.log('error', error);
+                    document.getElementById('newEmployeeError').textContent = 'Błędne dane pracownika!';
+                });
         });
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -352,39 +326,21 @@
             };
 
             fetch('http://localhost:8080/api/employees', requestOptions)
-            .then(response => response.json())
-            .then(employees => {
+                .then(response => response.json())
+                .then(employees => {
                     let employeeTable = document.getElementById('employeeTable');
                     let combinedTemplate = '';
-                    employees.forEach(employee =>combinedTemplate += createRecord(employee))
+                    employees.forEach(employee => combinedTemplate += createRecord(employee))
                     employeeTable.innerHTML = combinedTemplate;
 
-                    document.querySelectorAll('.deleteEmployeeButton').forEach(button => {
-                        button.addEventListener('click', function (e) {
-                            let modal = document.getElementById('deleteModal');
-                            modal.setAttribute('style', 'display:block;');
-                            modal.classList.add('in');
-                            document.body.classList.add('modal-open');
-
-                            document.querySelectorAll('.btn-default').forEach(button => {
-                                button.addEventListener('click', function () {
-                                    modal.removeAttribute('style');
-                                    modal.classList.remove('in');
-                                });
-                            });
-
-                            const userId = e.target.parentElement.parentElement.id.split('employeeId')[1];
+                            // const userId = e.target.parentElement.parentElement.id.split('employeeId')[1];
                             // TODO
                             // DELETE
                             // USER
-                    });
-                });
-            })
-            .catch(error => console.log('error', error));
+                 })
+                .catch(error => console.log('error', error));
         });
 
-        // MODAL to append
-        // class='modal fade in' style = 'display:block'
     </script>
 </body>
 

@@ -1,9 +1,20 @@
+
+.vertical-alignment-helper {
+    display:table;
+    height: 100%;
+    width: 100%;
+}
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+}
 .modal-content {
     border: none !important;
-    margin: auto;
     position: relative;
-    min-width: 600px;
+    width: 600px;
     min-height: 400px;
+    margin: auto;
 }
 
 .modal-footer {
@@ -23,20 +34,20 @@
 }
 
 .form-horizontal.style-form .form-group {
-    /* override */
     border-bottom: none;
-    padding-bottom: 0px;
-    margin-bottom: 0px;
-}
-.form-group {
-    margin-bottom: 0px;
 }
 
 .form-panel {
-    /* override */
     background: #ffffff;
     margin: 10px;
     padding: 10px;
     box-shadow: none;
     text-align: left;
+}
+
+#newEmployeeError {
+    color: rgb(219, 0, 0);
+    display: inline;
+    position: relative;
+    right: 45%;
 }

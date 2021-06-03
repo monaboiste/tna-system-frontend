@@ -1,7 +1,6 @@
 document.getElementById('loginButton').addEventListener('click', function (e) {
     e.preventDefault();
     // see: login.html
-
     sessionStorage.clear();
 
     const username = document.getElementById('username').value;
