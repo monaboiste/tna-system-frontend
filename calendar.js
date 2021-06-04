@@ -1,3 +1,21 @@
+window.onload = function(){ 
+    checkForAdmin();
+}
+
+function checkForAdmin(){
+    const role = localStorage.getItem('role');
+
+    if(role === 'ADMIN') {
+        document.getElementById('adminMenu').innerHTML = 
+        `
+        <a class='inactive' href='employees.html'>
+                <i class='fa fa-users'></i>
+                <span>Pracownicy</span>
+        </a>
+        `
+    }
+}
+
 function title(elapsed) {
     const hours = Math.floor(elapsed / 60);
     const minutes = elapsed % 60;
@@ -71,8 +89,8 @@ function calcWorkHoursInMonth(attendanceRecords, calendar) {
 }
 
 function fetchCalendarData() {
-    const userId = sessionStorage.getItem('userId');
-    const token = sessionStorage.getItem('token');
+    const userId = localStorage.getItem('userId');
+    const token = localStorage.getItem('token');
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');

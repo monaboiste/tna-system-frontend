@@ -26,7 +26,10 @@ body {
 
 ul li {
     list-style: none;
+    font-size:1.25em;
+    padding: 0.25em;
 }
+
 
 a, a:hover, a:focus {
     text-decoration: none;

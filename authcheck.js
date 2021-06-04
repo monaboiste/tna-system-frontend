@@ -1,4 +1,4 @@
-const loggedIn = sessionStorage.getItem('loggedIn');
+const loggedIn = localStorage.getItem('loggedIn');
 if (!loggedIn) {
     document.location.replace('login.html');
 }
