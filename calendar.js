@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const calendarEl = document.getElementById('calendar');
 
     let calendar = new FullCalendar.Calendar(calendarEl, {
+        height: 1000,
         locale: 'pl',
         firstDay: 1,
         buttonText: { today: 'bieżący' },
@@ -14,8 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
             $('#calendarModal').modal();
         }
     });
-
-    calendar.render();
 
     fetchCalendarData().then(attendanceRecords => {
         attendanceRecords.forEach(record => {
@@ -30,6 +29,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 leftAt: record.leftAt.split(' ')[1]
             });
         });
+
+        calendar.render();
 
         const { hours, mins } = calcWorkHoursInMonth(attendanceRecords, calendar);
         document.getElementById('hours').textContent = hours;
@@ -55,7 +56,7 @@ function calcWorkHoursInMonth(attendanceRecords, calendar) {
 }
 
 function fetchCalendarData() {
-    const userId = localStorage.getItem('userId');
+    const employeeId = localStorage.getItem('userId');
     const token = localStorage.getItem('token');
 
     const headers = new Headers();
@@ -67,7 +68,7 @@ function fetchCalendarData() {
         headers: headers,
     };
 
-    return fetch(`http://localhost:8080/api/employees/${userId}/attendance`, requestOptions)
+    return fetch(`http://localhost:8080/api/employees/${employeeId}/attendance`, requestOptions)
         .then(response => response.json())
         .then(data => Promise.resolve(data))
         .catch(error => console.log('error', error));

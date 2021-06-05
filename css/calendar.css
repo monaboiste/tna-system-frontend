@@ -34,6 +34,10 @@
     background: #00dab562 !important;
 }
 
+.fc-scroller {
+    overflow: hidden !important;
+}
+
 .vertical-alignment-helper {
     display:table;
     height: 100%;
