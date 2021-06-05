@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
         showNonCurrentDates: false,
         eventClick: function (info) {
             $('#modalTitle').html(info.event.start.toLocaleDateString('pl-PL', dateLongFormat));
-            $('#modalBody').html(details(info.event.extendedProps.enteredAt, info.event.extendedProps.leftAt));
+            $('#modalBody').html(details(info.event.extendedProps.enteredAt, info.event.extendedProps.leftAt, info.event.title));
             $('#calendarModal').modal();
         }
     });
@@ -55,8 +55,8 @@ function calcWorkHoursInMonth(attendanceRecords, calendar) {
 }
 
 function fetchCalendarData() {
-    const userId = sessionStorage.getItem('userId');
-    const token = sessionStorage.getItem('token');
+    const userId = localStorage.getItem('userId');
+    const token = localStorage.getItem('token');
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -79,7 +79,9 @@ function title(elapsed) {
     return hours.toString() + ':' + minutes.toString().padStart(2, '0');
 }
 
-function details(enteredAt, leftAt) {
+function details(enteredAt, leftAt, workTimeElapsed) {
+    const time = workTimeElapsed.split(':');
     return 'Godzina wejścia: ' + enteredAt.toString() + '<br><br>' +
-        'Godzina wyjścia: ' + leftAt.toString();
+        'Godzina wyjścia: ' + leftAt.toString() + '<br><br>' +
+        'W danym dniu przepracowano: ' + time[0] + 'h ' + time[1] + 'min';
 }

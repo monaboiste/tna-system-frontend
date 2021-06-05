@@ -1,7 +1,7 @@
 document.getElementById('loginButton').addEventListener('click', function (e) {
     e.preventDefault();
     // see: login.html
-    sessionStorage.clear();
+    localStorage.clear();
 
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
@@ -14,21 +14,21 @@ document.getElementById('loginButton').addEventListener('click', function (e) {
         method: 'GET',
         headers: headers
     };
-    const baseUrl = 'https://tna-system.herokuapp.com';
+    // const baseUrl = 'https://tna-system.herokuapp.com';
     fetch('http://localhost:8080/api/users/current', requestOptions)
         .then((response) => {
             if (response.ok) {
                 return response.json();
             } else {
-                document.getElementById('loginError').textContent = 'Nieprawidłowe dane logowania!';
                 return Promise.reject(response);
             }
         })
         .then(function (data) {
             if (data) {
-                sessionStorage.setItem('token', b64token);
-                sessionStorage.setItem('userId', data.id);
-                sessionStorage.setItem('loggedIn', true);
+                localStorage.setItem('token', b64token);
+                localStorage.setItem('userId', data.id);
+                localStorage.setItem('userRole', data.role);
+                localStorage.setItem('loggedIn', true);
 
                 return fetch(`http://localhost:8080/api/employees/${data.id}`, requestOptions);
             }
@@ -41,13 +41,13 @@ document.getElementById('loginButton').addEventListener('click', function (e) {
             }
         })
         .then(function (data) {
-            sessionStorage.setItem('employeeFirstname', data.firstName);
-            sessionStorage.setItem('employeeLastname', data.lastName);
+            localStorage.setItem('employeeFirstname', data.firstName);
+            localStorage.setItem('employeeLastname', data.lastName);
 
             document.location.replace('index.html');
         })
         .catch(error => {
             console.log('error', error);
-            document.getElementById('loginError').textContent = 'Coś poszło nie tak.';
+            document.getElementById('loginError').textContent = 'Nieprawidłowe dane logowania!';
         });
 });

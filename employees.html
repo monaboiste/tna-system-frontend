@@ -63,7 +63,7 @@
             <div id='sidebar' class='nav-collapse '>
                 <!-- sidebar menu start-->
                 <ul class='sidebar-menu' id='nav-accordion'>
-                    <p class='centered'><a href='profile.html'><img src='img/ui-sam.jpg' class='img-circle'
+                    <p class='centered'><a href='index.html'><img src='img/ui-sam.jpg' class='img-circle'
                                 width='80'></a></p>
                     <h5 id='employeeData' class='centered'></h5>
                     <li class='mt'>
@@ -71,7 +71,7 @@
 
                         <!-- TODO: Ta karta powinna byc dostepna tylko dla admin (sprawdzic role) -->
 
-                        <a class='active' href='employees.html'>
+                        <a class='admin active' href='employees.html'>
                             <i class='fa fa-users'></i>
                             <span>Pracownicy</span>
                         </a>
@@ -97,7 +97,7 @@
         <section id='main-content'>
             <section class='wrapper'>
                 <!--new employee modal start-->
-                <div id='newEmployeeModal' class='modal fade' tabindex='-1' role='dialog' data-backdrop="true"
+                <div id='newEmployeeModal' class='modal fade' tabindex='-1' role='dialog' data-backdrop='true'
                     aria-labelledby='newEmployeeModalLabel' aria-hidden='true'>
                     <div class='vertical-alignment-helper'>
                         <div class='modal-dialog vertical-align-center'>
@@ -176,7 +176,7 @@
                 </div>
                 <!--new employee modal end-->
                 <!--delete employee modal start-->
-                <div id='deleteEmployeeModal' class='modal fade' tabindex='-1' role='dialog' data-backdrop="true"
+                <div id='deleteEmployeeModal' class='modal fade' tabindex='-1' role='dialog' data-backdrop='true'
                     aria-labelledby='deleteEmployeeModalLabel' aria-hidden='true'>
                     <div class='vertical-alignment-helper'>
                         <div class='modal-dialog vertical-align-center'>
@@ -192,6 +192,27 @@
                                     <p id='deleteEmployeeError'></p>
                                     <button id='deleteEmployeeRequest' type='button' class='btn btn-danger'
                                         style='cursor:pointer;'>Usuń</button>
+                                    <button type='button' class='btn btn-default' data-dismiss='modal'
+                                        style='cursor:pointer;'>Anuluj</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--new employee modal end-->
+                <!--delete employee modal start-->
+                <div id='employeeDetailsModal' class='modal fade' tabindex='-1' role='dialog' data-backdrop='true'
+                    aria-labelledby='employeeDetailsModalLabel' aria-hidden='true'>
+                    <div class='vertical-alignment-helper'>
+                        <div class='modal-dialog vertical-align-center'>
+                            <div class='modal-content'>
+                                <div class='modal-header'>
+                                    <h4 id='employeeDetailsModalTitle' class='modal-title'>Szczegóły</h4>
+                                </div>
+                                <div id='employeeDetailsModalBody' class='modal-body'>
+                                    <!-- Details here -->
+                                </div>
+                                <div class='modal-footer' style='position:relative;'>
                                     <button type='button' class='btn btn-default' data-dismiss='modal'
                                         style='cursor:pointer;'>Anuluj</button>
                                 </div>
@@ -278,7 +299,7 @@
     <script src='logout.js'></script>
 
     <script>
-        const token = sessionStorage.getItem('token');
+        const token = localStorage.getItem('token');
 
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -289,7 +310,9 @@
             const employeeRecordTemplate = `
                 <tr id='employeeId${employee.id}'>
                     <td>
-                        <a href='basic_table.html#'>${employee.firstName} ${employee.lastName}</a>
+                        <a class='employeeDetails' data-toggle='modal' data-target='#employeeDetailsModal' style='cursor:pointer;'>
+                            ${employee.firstName} ${employee.lastName}
+                        </a>
                     </td>
                     <td class='hidden-phone'>${login}</td>
                     <td>
@@ -370,17 +393,68 @@
                             })
                         });
                     });
+
+                    document.querySelectorAll('.employeeDetails').forEach(button => {
+                        button.addEventListener('click', e => {
+                            const employeeId = e.target.parentElement.parentElement.id.split('employeeId')[1];
+                            console.log(employeeId);
+
+                            fetch(`http://localhost:8080/api/employees/${employeeId}`, requestOptions)
+                                .then(response => response.json())
+                                .then(employee => {
+                                    console.log(employee);
+                                    document.getElementById('employeeDetailsModalBody').innerHTML = createEmployeeDetailsTemplate(employee);
+                                })
+                                .catch(error => console.log('error', error));
+                        });
+                    });
                  })
                 .catch(error => console.log('error', error));
         });
 
-        function deleteEmployee(userId) {
+        function createEmployeeDetailsTemplate(employee) {
+            return `<div style='overflow:hidden;'>
+                <div class='servicetitle' style='text-align:center;'>
+                  <h4>${employee.firstName} ${employee.lastName}</h4>
+                  <hr>
+                </div>
+                <div class='icn-main-container'>
+                    <p class='centered'>
+                        <a href='index.html'><img src='img/ui-sam.jpg' class='img-circle' width='80'></a>
+                    </p>
+                </div>
+                <div style='margin: 20px 30px 0px 30px;'>
+                <div class='group-rom'>
+                    <div class='first-part odd' style='background:none;'>Imię</div>
+                    <div class='second-part'>${employee.firstName}</div>
+                </div>
+                <div class='group-rom'>
+                    <div class='first-part odd' style='background:none;'>Nazwisko</div>
+                    <div class='second-part'>${employee.lastName}</div>
+                </div>
+                <div class='group-rom'>
+                    <div class='first-part odd' style='background:none;'>Adres</div>
+                    <div class='second-part'>${employee.street}, ${employee.postCode} ${employee.city}</div>
+                </div>
+                <div class='group-rom'>
+                    <div class='first-part odd' style='background:none;'>Dział</div>
+                    <div class='second-part'>${employee.department}</div>
+                </div>
+                <div class='group-rom'>
+                    <div class='first-part odd' style='background:none;'>Numer umowy</div>
+                    <div class='second-part'>${employee.contractId}</div>
+                </div>
+                </div>
+              </div>`.trim();
+        }
+
+        function deleteEmployee(employeeId) {
             const requestOptions = {
                 method: 'DELETE',
                 headers: headers,
             };
 
-            fetch(`http://localhost:8080/api/employees/${userId}`, requestOptions)
+            fetch(`http://localhost:8080/api/employees/${employeeId}`, requestOptions)
                 .then(response => {
                     if (response.ok) {
                         window.location.reload();
