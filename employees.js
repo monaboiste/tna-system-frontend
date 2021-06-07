@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const employeeId = e.target.parentElement.parentElement.id.split('employeeId')[1];
                     // Store for calendar
                     sessionStorage.setItem('currentReviewedEmployeeId', employeeId);
+                    console.log(employeeId);
 
                     fetch(`http://localhost:8080/api/employees/${employeeId}`, requestOptions)
                         .then(response => response.json())

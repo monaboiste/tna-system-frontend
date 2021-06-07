@@ -32,6 +32,7 @@
 
 .fc-day-today {
     background: #00dab562 !important;
+    border: solid #00dab5 2px;
 }
 
 .fc-scroller {

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const firstname = sessionStorage.getItem('employeeFirstname');
-    const lastname = sessionStorage.getItem('employeeLastname');
+    const firstname = localStorage.getItem('employeeFirstname');
+    const lastname = localStorage.getItem('employeeLastname');
 
     document.getElementById('employeeData').textContent = firstname + ' ' + lastname;
 });

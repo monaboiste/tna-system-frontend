@@ -18,6 +18,7 @@
     <!-- Bootstrap core CSS -->
     <link href='lib/bootstrap/css/bootstrap.min.css' rel='stylesheet'>
     <!--external css-->
+    <link rel='stylesheet' type='text/css' href='css/jquery.datetimepicker.min.css' />
     <link href='lib/font-awesome/css/font-awesome.css' rel='stylesheet' />
     <!-- <link href='lib/fullcalendar/bootstrap-fullcalendar.css' rel='stylesheet' /> -->
     <!-- Custom styles for this template -->
@@ -29,6 +30,7 @@
     <link href='css/calendar.css' rel='stylesheet'>
     <link href='lib/fullcalendar/main.css' rel='stylesheet' />
     <script src='lib/fullcalendar/main.js'></script>
+
 </head>
 <!-- .modal-open .modal -->
 
@@ -259,13 +261,63 @@
                         <div class='modal-dialog vertical-align-center'>
                             <div class='modal-content'>
                                 <div class='modal-header'>
-                                    <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'></span> <span
-                                        class='sr-only'>close</span></button>
-                                        <h4 id='calendarModalTitle' class='modal-title'></h4>
+                                    <button type='button' class='close' data-dismiss='modal'><span
+                                            aria-hidden='true'></span> <span class='sr-only'>close</span></button>
+                                    <h4 id='calendarModalTitle' class='modal-title'></h4>
                                 </div>
-                                <div id='calendarModalBody' class='modal-body'> </div>
+                                <div id='calendarModalBody' class='modal-body'>
+                                    <div id='editWorkHoursForm' class='form-panel'>
+                                        <form action='#' class='form-horizontal style-form' autocomplete='off'>
+                                            <div class='form-group'>
+                                                <label class='control-label col-md-3'> Czas wejścia</label>
+                                                <div class='col-md-4' style='width:60%;'>
+                                                    <div class='input-group date form_datetime-component'>
+                                                        <input id='entryTimePicker' type='text' size='16'
+                                                            class='form-control' />
+                                                        <span class='input-group-btn'>
+                                                            <button id='entryTimePickerOpen' type='button'
+                                                                class='btn btn-theme date-set'>
+                                                                <i class='fa fa-clock-o'></i>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class='form-group'>
+                                                <label class='control-label col-md-3'> Czas wyjścia</label>
+                                                <div class='col-md-4' style='width:60%;'>
+                                                    <div class='input-group date form_datetime-component'>
+                                                        <input id='exitTimePicker' type='text' size='16'
+                                                            class='form-control' />
+                                                        <span class='input-group-btn'>
+                                                            <button id='exitTimePickerOpen' type='button'
+                                                                class='btn btn-theme date-set'>
+                                                                <i class='fa fa-clock-o' style='color:black;'></i>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class='form-group'>
+                                                <label class='control-label col-md-3'> Czas łączny</label>
+                                                <div id='editWorkHours' class='col-md-4' style='width:60%;'>
+                                                    0h 0min
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div id='alertDiv'>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class='modal-footer'>
-                                    <button type='button' class='btn btn-default' data-dismiss='modal'>Zamknij</button>
+                                    <!-- Those buttons will be toggled -->
+                                    <button id='newAttendanceRecord' type='button' class='btn btn-info'style='cursor:pointer;'>
+                                        Zatwierdź
+                                    </button>
+                                    <button id='editAttendanceRecord' type='button' class='btn btn-info' style='cursor:pointer;'>
+                                        Zatwierdź
+                                    </button>
+                                    <button type='button' class='btn btn-default' data-dismiss='modal'>Anuluj</button>
                                 </div>
                             </div>
                         </div>
@@ -347,6 +399,7 @@
     <script type='text/javascript' src='lib/gritter/js/jquery.gritter.js'></script>
     <script type='text/javascript' src='lib/gritter-conf.js'></script>
     <!--script for this page-->
+    <script src='lib/jquery.datetimepicker.full.min.js'></script>
     <script src='logout.js'></script>
     <script src='employees.js'></script>
     <script src='employeeDetailsCalendar.js'></script>
