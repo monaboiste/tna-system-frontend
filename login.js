@@ -19,30 +19,28 @@ document.getElementById('loginButton').addEventListener('click', function (e) {
         .then((response) => {
             if (response.ok) {
                 return response.json();
-            } else {
-                return Promise.reject(response);
             }
+            return Promise.reject(response);
         })
-        .then(function (data) {
-            if (data) {
+        .then(function (user) {
+            if (user) {
                 localStorage.setItem('token', b64token);
-                localStorage.setItem('userId', data.id);
-                localStorage.setItem('userRole', data.role);
+                localStorage.setItem('userId', user.id);
+                localStorage.setItem('userRole', user.role);
                 localStorage.setItem('loggedIn', true);
 
-                return fetch(`http://localhost:8080/api/employees/${data.id}`, requestOptions);
+                return fetch(`http://localhost:8080/api/employees/${user.id}`, requestOptions);
             }
         })
         .then(function (response) {
             if (response.ok) {
                 return response.json();
-            } else {
-                return Promise.reject(response);
             }
+            return Promise.reject(response);
         })
-        .then(function (data) {
-            localStorage.setItem('employeeFirstname', data.firstName);
-            localStorage.setItem('employeeLastname', data.lastName);
+        .then(function (employee) {
+            localStorage.setItem('employeeFirstname', employee.firstName);
+            localStorage.setItem('employeeLastname', employee.lastName);
 
             document.location.replace('index.html');
         })

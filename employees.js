@@ -13,10 +13,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     fetch('http://localhost:8080/api/employees', requestOptions)
         .then(response => response.json())
-        .then(employees => {
+        .then(async (employees) => {
+            const employeesWithRoles = await mapUserRoleToEmployee(employees);
+
             let employeeTable = document.getElementById('employeeTable');
             let combinedTemplate = '';
-            employees.forEach(employee => combinedTemplate += createRecord(employee))
+            employeesWithRoles.forEach(employee => combinedTemplate += createRecord(employee))
             employeeTable.innerHTML = combinedTemplate;
 
             // Delete employee
@@ -124,7 +126,7 @@ function createEmployeeDetailsTemplate(employee) {
             </div>
             <div class='icn-main-container'>
                 <p class='centered'>
-                    <a href='index.html'><img src='img/ui-sam.jpg' class='img-circle' width='80'></a>
+                    <a><img src='img/ui-sam.jpg' class='img-circle' width='80'></a>
                 </p>
             </div>
             <div style='margin: 20px 30px 0px 30px;'>
@@ -154,7 +156,7 @@ function createEmployeeDetailsTemplate(employee) {
 }
 
 function createRecord(employee) {
-    const login = `${employee.firstName[0].toLowerCase()}${employee.lastName.toLowerCase()}${employee.contractId.toLowerCase().substring(employee.contractId.length - 3)}`;
+    const label = (employee.role === "ADMIN") ? 'label-warning' : 'label-default';
     const employeeRecordTemplate = `
         <tr id='employeeId${employee.id}'>
             <td>
@@ -163,10 +165,10 @@ function createRecord(employee) {
                 </a>
             </td>
             <td class='hidden-phone'>
-                ${login}
+                ${employee.username}
             </td>
             <td>
-                <label class='label label-success btn-xs'>aktywny</span>
+                <label class='label ${label} btn-xs'>${employee.role}</span>
             </td>
             <td>
                 <button class='deleteEmployeeButton btn btn-danger btn-xs' data-toggle='modal' data-target='#deleteEmployeeModal'>
@@ -175,4 +177,24 @@ function createRecord(employee) {
             </td>
         </tr>`;
     return employeeRecordTemplate.trim();
+}
+
+async function mapUserRoleToEmployee(employees) {
+    const requestOptions = {
+        method: 'GET',
+        headers: headers,
+    };
+
+    const users = await fetch('http://localhost:8080/api/users', requestOptions)
+        .then(response => response.json())
+        .then(users => {
+            return users.map((user, i) => {
+                if (user.id == employees[i].id) {
+                    return Object.assign({}, user, employees[i])
+                }
+            });
+        })
+        .catch(error => console.log('error', error));
+
+    return users;
 }

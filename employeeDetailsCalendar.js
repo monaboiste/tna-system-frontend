@@ -304,8 +304,8 @@ function createAlertTemplate(success) {
     const alertDescription = success ? 'Zmiany zostały pomyślnie wprowadzone' : 'Wprowadzono złe dane'
     const alertTemplate =
         `<div>
-            <div class="alert ${alertSuccess} alert-dismissable">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <div class='alert ${alertSuccess} alert-dismissable' style='margin-bottom: 80px;'>
+              <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
               <strong>${alertTitle}</strong> ${alertDescription}.
         </div>`;
     return alertTemplate.trim();
