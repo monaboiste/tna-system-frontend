@@ -10,15 +10,23 @@
     margin: 40px auto;
 }
 
+#calendar .fc-fc-scrollgrid-sync-table, #calendar th, #calendar td,
+#employeeCalendar .fc-fc-scrollgrid-sync-table, #employeeCalendar th, #employeeCalendar td {
+    border: 0.5px solid #cfcfcfc5 !important;
+}
+
 .fc-toolbar-title {
     color: #2c3e50;
 }
 
 .fc-event {
-    background-color: #9baec2;
     color: #ffffff;
     font-size: 2rem;
     cursor: pointer;
+}
+
+.fc-daygrid-day-number, .fc-col-header-cell-cushion, .fc-col-header-cell-cushion {
+    color: #2c3e50;
 }
 
 .fc-event-title {
@@ -30,9 +38,8 @@
     opacity: 1 !important;
 }
 
-.fc-day-today {
-    background: #00dab562 !important;
-    border: solid #00dab5 2px;
+.fc .fc-day-today {
+    background-color: #73A6B0 !important;
 }
 
 .fc-scroller {

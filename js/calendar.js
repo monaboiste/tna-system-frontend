@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
             timestamp = record.enteredAt.split(' ');
             calendar.addEvent({
                 display: 'background',
-                backgroundColor: '#4ecdc4',
+                backgroundColor: '#4ecdc4a8',
                 id: record.id,
                 title: title(record.elapsedTimePerShiftInMinutes),
                 start: timestamp[0],

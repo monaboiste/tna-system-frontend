@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
             attendanceRecords.forEach(record => {
                 employeeCalendar.addEvent({
                     display: 'background',
-                    backgroundColor: '#4ecdc4',
+                    backgroundColor: '#4ecdc4a8',
                     id: record.id,
                     title: title(record.elapsedTimePerShiftInMinutes),
                     start: record.enteredAt.split(' ')[0],
