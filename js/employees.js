@@ -16,6 +16,16 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(async (employees) => {
             const employeesWithRoles = await mapUserRoleToEmployee(employees);
 
+            employeesWithRoles.sort((lhs, rhs) => {
+                if (lhs.lastName < rhs.lastName) {
+                    return -1;
+                }
+                if (lhs.lastName > rhs.lastName) {
+                    return 1;
+                }
+                return 0;
+            });
+
             let employeeTable = document.getElementById('employeeTable');
             let combinedTemplate = '';
             employeesWithRoles.forEach(employee => combinedTemplate += createRecord(employee))
@@ -121,7 +131,7 @@ function createEmployeeDetailsTemplate(employee) {
     const employeeDetailsTemplate = `
         <div style='overflow:hidden;'>
             <div class='servicetitle' style='text-align:center;'>
-                <h4>${employee.firstName} ${employee.lastName}</h4>
+                <h4>${employee.lastName} ${employee.firstName}</h4>
                 <hr>
             </div>
             <div class='icn-main-container'>
@@ -161,7 +171,7 @@ function createRecord(employee) {
         <tr id='employeeId${employee.id}'>
             <td>
                 <a class='employeeDetails' data-toggle='modal' data-target='#employeeDetailsModal' style='cursor:pointer;'>
-                    ${employee.firstName} ${employee.lastName}
+                    ${employee.lastName} ${employee.firstName}
                 </a>
             </td>
             <td class='hidden-phone'>
