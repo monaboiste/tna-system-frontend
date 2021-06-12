@@ -28,5 +28,5 @@ ___
 
 #### Frontend Technology stack:
 * HTML5
-* CSS
+* Bootstrap 3
 * JavaScript ES6

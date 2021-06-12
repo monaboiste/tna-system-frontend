@@ -1,0 +1,80 @@
+#calendar {
+    max-width: 800px;
+    max-height: 32em;
+    margin: 40px auto;
+}
+
+#totalWorkHours {
+    text-align: right;
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+#calendar .fc-fc-scrollgrid-sync-table, #calendar th, #calendar td,
+#employeeCalendar .fc-fc-scrollgrid-sync-table, #employeeCalendar th, #employeeCalendar td {
+    border: 0.5px solid #cfcfcfc5 !important;
+}
+
+.fc-toolbar-title {
+    color: #2c3e50;
+}
+
+.fc-event {
+    color: #ffffff;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.fc-daygrid-day-number, .fc-col-header-cell-cushion, .fc-col-header-cell-cushion {
+    color: #2c3e50;
+}
+
+.fc-event-title {
+    font-style: normal !important;
+    font-family: 'Ruda', sans-serif;
+}
+
+.fc .fc-bg-event {
+    opacity: 1 !important;
+}
+
+.fc .fc-day-today {
+    background-color: #73A6B0 !important;
+}
+
+.fc-scroller {
+    overflow: hidden !important;
+}
+
+.vertical-alignment-helper {
+    display:table;
+    height: 100%;
+    width: 100%;
+}
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+}
+.modal-content {
+    border: none !important;
+    position: relative;
+    width: 600px;
+    min-height: 400px;
+    margin: auto;
+}
+
+.modal-footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+}
+
+.modal-header {
+    border-radius: 6px 6px 0px 0px;
+}
+
+.modal-body {
+    font-size: 13px;
+}
