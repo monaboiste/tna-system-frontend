@@ -32,32 +32,32 @@ $(() => {
     });
 
     fetchAttendanceForEmployee()
-    .then(attendanceRecords => {
-        attendanceRecords.forEach(record => {
-            const timestamp = record.enteredAt.split(' ');
-            calendar.addEvent({
-                display: 'background',
-                backgroundColor: '#4ecdc4a8',
-                id: record.id,
-                title: title(record.elapsedTimePerShiftInMinutes),
-                start: timestamp[0],
-                enteredAt: timestamp[1],
-                leftAt: record.leftAt.split(' ')[1]
-            });
-        })
+        .then(attendanceRecords => {
+            attendanceRecords.forEach(record => {
+                const timestamp = record.enteredAt.split(' ');
+                calendar.addEvent({
+                    display: 'background',
+                    backgroundColor: '#4ecdc4a8',
+                    id: record.id,
+                    title: title(record.elapsedTimePerShiftInMinutes),
+                    start: timestamp[0],
+                    enteredAt: timestamp[1],
+                    leftAt: record.leftAt.split(' ')[1]
+                });
+            })
 
-        calendar.render();
+            calendar.render();
 
-        const { hours, mins } = calcWorkHoursInMonth(attendanceRecords, calendar);
-        $('#hours').text(hours);
-        $('#mins').text(mins);
-
-        $('.fc-button-primary').click(e => {
             const { hours, mins } = calcWorkHoursInMonth(attendanceRecords, calendar);
             $('#hours').text(hours);
             $('#mins').text(mins);
+
+            $('.fc-button-primary').click(() => {
+                const { hours, mins } = calcWorkHoursInMonth(attendanceRecords, calendar);
+                $('#hours').text(hours);
+                $('#mins').text(mins);
+            });
         });
-    });
 });
 
 function calcWorkHoursInMonth(attendanceRecords, calendar) {

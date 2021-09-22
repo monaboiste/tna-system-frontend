@@ -1,3 +1,5 @@
+import { apiUrl } from "./api.js";
+
 const token = localStorage.getItem('token');
 
 const headers = new Headers();
@@ -5,15 +7,15 @@ headers.append('Content-Type', 'application/json');
 headers.append('Authorization', `Basic ${token}`);
 
 // Fetch all employees
-document.addEventListener('DOMContentLoaded', function () {
+$(() => {
     const requestOptions = {
         method: 'GET',
         headers: headers,
     };
 
-    fetch('http://localhost:8080/api/employees', requestOptions)
+    fetch(`${apiUrl}/employees`, requestOptions)
         .then(response => response.json())
-        .then(async (employees) => {
+        .then(async employees => {
             const employeesWithRoles = await mapUserRoleToEmployee(employees);
 
             employeesWithRoles.sort((lhs, rhs) => {
@@ -26,52 +28,42 @@ document.addEventListener('DOMContentLoaded', function () {
                 return 0;
             });
 
-            let employeeTable = document.getElementById('employeeTable');
+            let employeeTable = $('#employeeTable');
             let combinedTemplate = '';
             employeesWithRoles.forEach(employee => combinedTemplate += createRecord(employee))
-            employeeTable.innerHTML = combinedTemplate;
+            employeeTable.html(combinedTemplate);
 
             // Delete employee
-            document.querySelectorAll('.deleteEmployeeButton').forEach(button => {
-                button.addEventListener('click', e => {
-                    document.getElementById('deleteEmployeeError').textContent = '';
-                    document.getElementById('deleteEmployeeName').textContent = e.target.parentElement.parentElement.children[0].innerText;
+            $('.deleteEmployeeButton').click(e => {
+                $('#deleteEmployeeError').text('');
+                $('#deleteEmployeeName').text(e.target.parentElement.parentElement.children[0].innerText);
 
-                    const userId = e.target.parentElement.parentElement.id.split('employeeId')[1];
+                const userId = e.target.parentElement.parentElement.id.split('employeeId')[1];
 
-                    document.getElementById('deleteEmployeeRequest').addEventListener('click', function () {
-                        deleteEmployee(userId);
-                    })
-                });
+                $('#deleteEmployeeRequest').click(() => deleteEmployee(userId));
             });
 
-            document.querySelectorAll('.employeeDetails').forEach(button => {
-                button.addEventListener('click', e => {
-                    const employeeId = e.target.parentElement.parentElement.id.split('employeeId')[1];
-                    // Store for calendar
-                    sessionStorage.setItem('currentReviewedEmployeeId', employeeId);
-                    console.log(employeeId);
+            $('.employeeDetails').click(e => {
+                const employeeId = e.target.parentElement.parentElement.id.split('employeeId')[1];
+                // Store for calendar
+                sessionStorage.setItem('currentReviewedEmployeeId', employeeId);
 
-                    fetch(`http://localhost:8080/api/employees/${employeeId}`, requestOptions)
-                        .then(response => response.json())
-                        .then(employee => {
-                            console.log(employee);
-                            document.getElementById('employeeDetailsModalBody').innerHTML = createEmployeeDetailsTemplate(employee);
-                        })
-                        .catch(error => console.log('error', error));
-                });
+                fetch(`${apiUrl}/employees/${employeeId}`, requestOptions)
+                    .then(response => response.json())
+                    .then(employee =>
+                        $('#employeeDetailsModalBody').html(createEmployeeDetailsTemplate(employee))
+                    )
+                    .catch(err => console.error(err));
             });
         })
-        .catch(error => console.log('error', error));
+        .catch(err => console.error(err));
 });
 
 // New employee
-document.getElementById('newEmployeeButton').addEventListener('click', function () {
-    document.getElementById('newEmployeeError').textContent = '';
-});
+$('#newEmployeeButton').click(() => $('#newEmployeeError').text(''));
 
-document.getElementById('newEmployeeRequest').addEventListener('click', function () {
-    let formData = $('#newEmployeeForm').serializeArray();
+$('#newEmployeeRequest').click(() => {
+    const formData = $('#newEmployeeForm').serializeArray();
     const requestBody = {
         firstName: formData[0].value,
         lastName: formData[1].value,
@@ -87,7 +79,7 @@ document.getElementById('newEmployeeRequest').addEventListener('click', function
         body: JSON.stringify(requestBody)
     };
 
-    fetch('http://localhost:8080/api/employees', requestOptions)
+    fetch(`${apiUrl}/employees`, requestOptions)
         .then(response => {
             if (response.ok) {
                 return response.json();
@@ -95,13 +87,12 @@ document.getElementById('newEmployeeRequest').addEventListener('click', function
             return Promise.reject(response);
         })
         .then(newEmployee => {
-            console.log(newEmployee)
             createRecord(newEmployee);
             window.location.reload();
         })
-        .catch(error => {
-            console.log('error', error);
-            document.getElementById('newEmployeeError').textContent = 'Błędne dane pracownika!';
+        .catch(err => {
+            console.error(err);
+            $('#newEmployeeError').text('Błędne dane pracownika!');
         });
 });
 
@@ -112,7 +103,7 @@ function deleteEmployee(employeeId) {
         headers: headers,
     };
 
-    fetch(`http://localhost:8080/api/employees/${employeeId}`, requestOptions)
+    fetch(`${apiUrl}/employees/${employeeId}`, requestOptions)
         .then(response => {
             if (response.ok) {
                 window.location.reload();
@@ -120,9 +111,9 @@ function deleteEmployee(employeeId) {
                 return Promise.reject(response);
             }
         })
-        .catch(error => {
-            console.log('error', error)
-            document.getElementById('deleteEmployeeError').textContent = 'Coś poszło nie tak...';
+        .catch(err => {
+            console.error(err)
+            $('#deleteEmployeeError').text('Coś poszło nie tak...');
         });
 }
 
@@ -195,7 +186,7 @@ async function mapUserRoleToEmployee(employees) {
         headers: headers,
     };
 
-    const users = await fetch('http://localhost:8080/api/users', requestOptions)
+    const users = await fetch(`${apiUrl}/users`, requestOptions)
         .then(response => response.json())
         .then(users => {
             return users.map((user, i) => {
@@ -204,7 +195,7 @@ async function mapUserRoleToEmployee(employees) {
                 }
             });
         })
-        .catch(error => console.log('error', error));
+        .catch(err => console.error(err));
 
     return users;
 }
