@@ -1,13 +1,7 @@
 # TNA System (Time and Attendance)
 TNA System is efficient working time management Web Application. The solution can function as a stand-alone system, which features:
 - keeping records of employees' working,
-- calculating working time on a monthly basis.  
-
-Records cover:
-- the number of working hours and the start and end hours of work,
-- the number of hours worked at night,
-- the number of overtimes,
-- days off.
+- calculating working time on a monthly basis.
 
 ___
 ### Project's functional requirements
@@ -22,7 +16,7 @@ ___
 ##### Employee time tracking system related
 | Req ID| Req Description | Priority |
 |:-----:|:---------------:|:--------:|
-| FR201 | The system shall register Employee's clock-ins and clock-outs (ex. using NFC proximity badages at terminals) and store in database | High |
+| FR201 | The system shall register Employee's clock-ins and clock-outs (e.g. using NFC proximity badages at terminals) and store in database | High |
 | FR202 | The system shall record the working hours of employees on a daily/mothly basis for each Employee | High |
 | FR203 | Manager shall be able manually change Employees' working hours | High |
 
@@ -30,3 +24,4 @@ ___
 * HTML5
 * Bootstrap 3
 * JavaScript ES6
+* JQuery

@@ -1,4 +1,4 @@
-document.getElementById('logoutButton').addEventListener('click', function (e) {
+$('#logoutButton').click(e => {
     e.preventDefault();
     localStorage.clear();
     document.location.replace('login.html');

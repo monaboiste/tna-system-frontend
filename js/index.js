@@ -1,5 +1,7 @@
+import { apiUrl } from './api.js';
+
 // Fetch all employees
-document.addEventListener('DOMContentLoaded', function () {
+$(() => {
     const userId = localStorage.getItem('userId');
     const b64token = localStorage.getItem('token');
     let headers = new Headers();
@@ -10,14 +12,9 @@ document.addEventListener('DOMContentLoaded', function () {
         headers: headers,
     };
 
-    fetch(`http://localhost:8080/api/employees/${userId}`, requestOptions)
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            }
-            return Promise.reject(response);
-        })
-        .then(function (employee) {
+    fetch(`${apiUrl}/employees/${userId}`, requestOptions)
+        .then(response => response.json())
+        .then(employee => {
             if (employee) {
                 $('#employeeFirstname').html(employee.firstName);
                 $('#employeeLastname').html(employee.lastName);
@@ -26,5 +23,5 @@ document.addEventListener('DOMContentLoaded', function () {
                 $('#employeeContractId').html(employee.contractId);
             }
         })
-        .catch(error => console.log('error', error));
+        .catch(err => console.error(err));
 });
