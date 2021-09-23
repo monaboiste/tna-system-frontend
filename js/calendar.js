@@ -44,7 +44,7 @@ $(() => {
                     enteredAt: timestamp[1],
                     leftAt: record.leftAt.split(' ')[1]
                 });
-            })
+            });
 
             calendar.render();
 
