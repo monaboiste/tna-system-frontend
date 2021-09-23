@@ -1,5 +1,5 @@
-// const BASE_URL = 'https://tna-system-backend.herokuapp.com';
-const BASE_URL = 'http://localhost:8080';
+const BASE_URL = 'https://tna-system-backend.herokuapp.com';
+// const BASE_URL = 'http://localhost:8080';
 const PREFIX = '/api';
 const API_URL = `${BASE_URL}${PREFIX}`;
 
