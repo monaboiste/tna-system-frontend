@@ -13,11 +13,7 @@ const API_URL = `${BASE_URL}${PREFIX}`;
             },
         };
 
-        const response = await fetch(`${API_URL}/users/currenst`, requestOptions);
-        if (response.ok) {
-            return response.json();
-        }
-        return Promise.reject(response);
+        return fetch(`${API_URL}/users/currenst`, requestOptions);
     }
 }
  */

@@ -190,10 +190,12 @@ async function mapUserRoleToEmployee(employees) {
         .then(response => response.json())
         .then(users => {
             return users.map((user, i) => {
-                if (user.id == employees[i].id) {
-                    return Object.assign({}, user, employees[i])
+                const emp = employees[i];
+                if (emp && user.id == emp.id) {
+                    return Object.assign({}, user, emp)
                 }
-            });
+            })
+            .filter(emp => emp);
         })
         .catch(err => console.error(err));
 
